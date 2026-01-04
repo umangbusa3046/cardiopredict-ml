@@ -1,2 +1,2 @@
 # cardiopredict-ml
-My ml froject for caradio prediction
+My ml project for caradio prediction
