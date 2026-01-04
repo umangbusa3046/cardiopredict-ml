@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CardioVision AI</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body class="dark-mode">
+    <div class="bg-animation"></div>
+
+    <nav class="navbar">
+      <div class="logo">CARDIO<span class="highlight">PREDICT</span></div>
+      <div class="nav-links">
+        <a href="#" onclick="showSection('home')">Analysis</a>
+        <a href="#" onclick="showSection('about')">Technology</a>
+        <a href="#" onclick="showSection('disclaimer')">Disclaimer</a>
+      </div>
+      <button id="theme-toggle" class="theme-btn">☀ Light Mode</button>
+    </nav>
+
+    <div class="container glass-panel" id="home-section">
+      <div class="grid-layout">
+        <div class="form-section">
+          <h2>Patient Diagnostics</h2>
+          <form id="prediction-form">
+            <div class="input-group">
+              <label>Age (Years)</label>
+              <input type="number" id="age" required placeholder="e.g. 50" />
+            </div>
+
+            <div class="row">
+              <div class="input-group">
+                <label>Height (cm)</label>
+                <input type="number" id="height" required placeholder="175" />
+              </div>
+              <div class="input-group">
+                <label>Weight (kg)</label>
+                <input type="number" id="weight" required placeholder="70" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Gender</label>
+              <select id="gender">
+                <option value="1">Female</option>
+                <option value="2">Male</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <div class="input-group">
+                <label>Systolic BP (ap_hi)</label>
+                <input type="number" id="ap_hi" required placeholder="120" />
+              </div>
+              <div class="input-group">
+                <label>Diastolic BP (ap_lo)</label>
+                <input type="number" id="ap_lo" required placeholder="80" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-group">
+                <label>Cholesterol</label>
+                <select id="cholesterol">
+                  <option value="1">Normal</option>
+                  <option value="2">Above Normal</option>
+                  <option value="3">Well Above Normal</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>Glucose</label>
+                <select id="gluc">
+                  <option value="1">Normal</option>
+                  <option value="2">Above Normal</option>
+                  <option value="3">Well Above Normal</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="toggles">
+              <label class="switch-label">
+                <input type="checkbox" id="smoke" />
+                <span class="slider"></span>
+                Smoker
+              </label>
+              <label class="switch-label">
+                <input type="checkbox" id="alco" />
+                <span class="slider"></span>
+                Alcohol
+              </label>
+              <label class="switch-label">
+                <input type="checkbox" id="active" checked />
+                <span class="slider"></span>
+                Active
+              </label>
+            </div>
+
+            <button type="submit" class="cyber-btn">INITIATE ANALYSIS</button>
+          </form>
+        </div>
+
+        <div class="result-section">
+          <div id="loader" class="loader hidden"></div>
+
+          <div id="result-content" class="hidden">
+            <h2>Prediction Matrix</h2>
+            <div class="risk-display">
+              <div class="risk-text">
+                <span id="risk-category">--</span> RISK
+              </div>
+              <div class="risk-value" id="risk-value">0%</div>
+            </div>
+
+            <div class="chart-container">
+              <canvas id="riskChart"></canvas>
+            </div>
+
+            <div class="feature-insight">
+              <h3>Health Vitals</h3>
+              <p id="bmi-display">BMI: --</p>
+            </div>
+          </div>
+
+          <div id="placeholder-content">
+            <h3>System Ready</h3>
+            <p>
+              Enter patient vitals to generate cardiovascular risk assessment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container glass-panel hidden" id="about-section">
+      <h2>About The System</h2>
+      <p>
+        This system uses a
+        <strong>Logistic Regression Machine Learning Model</strong> trained on
+        over 70,000 patient records. It analyzes biometric features to predict
+        the probability of cardiovascular disease.
+      </p>
+      <br />
+      <h3>Features Used:</h3>
+      <ul style="text-align: left; margin-left: 20px">
+        <li>Objective: Age, Height, Weight, Gender</li>
+        <li>Examination: Blood Pressure, Cholesterol, Glucose</li>
+        <li>Subjective: Smoking, Alcohol, Physical Activity</li>
+      </ul>
+    </div>
+
+    <div class="container glass-panel hidden" id="disclaimer-section">
+      <h2 style="color: #ff0055">DISCLAIMER</h2>
+      <p>
+        <strong
+          >This application is for educational and study purposes only.</strong
+        >
+      </p>
+      <p>
+        The predictions generated by this AI model should NOT be considered as
+        medical advice, diagnosis, or treatment planning.
+      </p>
+      <p>
+        Always consult with a qualified healthcare professional for medical
+        concerns.
+      </p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
